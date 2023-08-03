@@ -15,6 +15,19 @@ terraform {
 data "enos_environment" "localhost" {}
 
 locals {
+  package_install_env = {
+    arch = {
+      "amd64" = "x86_64"
+      "arm64" = "aarch64"
+    }
+    "packages" = join(" ", var.packages)
+    "package_manager" = var.package_manager
+  }
+  distro_version_sles = {
+    "v12_sp5_standard" = "12.5"
+    "v15_sp4_standard" = "15.4"
+    "v15_sp5_standard" = "15.5"
+  }
   audit_device_file_path = "/var/log/vault/vault_audit.log"
   bin_path               = "${var.install_dir}/vault"
   consul_bin_path        = "${var.consul_install_dir}/consul"
@@ -86,7 +99,10 @@ resource "enos_remote_exec" "install_packages" {
   }
 
   environment = {
-    PACKAGES = join(" ", var.packages)
+    ARCH = local.package_install_env.arch[var.arch]
+    PACKAGES = local.package_install_env["packages"]
+    PACKAGE_MANAGER = local.package_install_env["package_manager"]
+    SLES_VERSION = local.distro_version_sles[var.distro_version_sles]
   }
 
   scripts = [abspath("${path.module}/scripts/install-packages.sh")]
@@ -306,4 +322,12 @@ resource "enos_local_exec" "wait_for_install_packages" {
   ]
 
   inline = ["true"]
+}
+
+output "package_install_env" {
+  value = local.package_install_env
+}
+
+output "distro_version_sles" {
+  value = local.distro_version_sles
 }

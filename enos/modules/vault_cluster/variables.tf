@@ -1,6 +1,12 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: BUSL-1.1
 
+variable "arch" {
+  type        = string
+  description = "The architecture being used"
+  default     = null
+}
+
 variable "artifactory_release" {
   type = object({
     username = string
@@ -144,6 +150,11 @@ variable "manage_service" {
   default     = true
 }
 
+variable "package_manager" {
+  type        = string
+  description = "The package manager that comes with each Linux distro"
+}
+
 variable "packages" {
   type        = list(string)
   description = "A list of packages to install via the target host package manager"
@@ -208,6 +219,12 @@ variable "shamir_unseal_keys" {
   type        = list(string)
   description = "Shamir unseal keys. Often only used adding additional nodes to an already initialized cluster."
   default     = null
+}
+
+variable "distro_version_sles" {
+  type = string
+  description = "The SLES distro version; sometimes required to install packages on certain SLES versions"
+  default = "15.5" // 15.4 or 12.5
 }
 
 variable "storage_backend" {

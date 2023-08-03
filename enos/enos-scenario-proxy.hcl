@@ -8,7 +8,7 @@ scenario "proxy" {
     artifact_type   = ["bundle", "package"]
     backend         = ["consul", "raft"]
     consul_version  = ["1.12.9", "1.13.9", "1.14.9", "1.15.5", "1.16.1"]
-    distro          = ["ubuntu", "rhel"]
+    distro          = ["amazon_linux", "leap", "rhel", "sles", "ubuntu"]
     edition         = ["ce", "ent", "ent.fips1402", "ent.hsm", "ent.hsm.fips1402"]
     seal            = ["awskms", "shamir"]
     seal_ha_beta    = ["true", "false"]
@@ -24,21 +24,31 @@ scenario "proxy" {
       arch    = ["arm64"]
       edition = ["ent.fips1402", "ent.hsm", "ent.hsm.fips1402"]
     }
+
+    # non-SAP, non-BYOS SLES AMIs in the versions we use are only offered for amd64
+    # (see distro_version_* variables in enos-variables.hcl for currently supported versions)
+    exclude {
+      distro = ["sles"]
+      arch   = ["arm64"]
+    }
   }
 
   terraform_cli = terraform_cli.default
   terraform     = terraform.default
   providers = [
     provider.aws.default,
-    provider.enos.ubuntu,
-    provider.enos.rhel
+    provider.enos.ec2_user,
+    provider.enos.ubuntu
   ]
 
   locals {
     artifact_path = matrix.artifact_source != "artifactory" ? abspath(var.vault_artifact_path) : null
     enos_provider = {
-      rhel   = provider.enos.rhel
-      ubuntu = provider.enos.ubuntu
+      amazon_linux = provider.enos.ec2_user
+      leap         = provider.enos.ec2_user
+      rhel         = provider.enos.ec2_user
+      sles         = provider.enos.ec2_user
+      ubuntu       = provider.enos.ubuntu
     }
     manage_service    = matrix.artifact_type == "bundle"
     vault_install_dir = matrix.artifact_type == "bundle" ? var.vault_install_dir : global.vault_install_dir_packages[matrix.distro]
@@ -189,8 +199,9 @@ scenario "proxy" {
         edition = var.backend_edition
         version = matrix.consul_version
       } : null
+      distro_version_sles  = var.distro_version_sles
       enable_audit_devices = var.vault_enable_audit_devices
-      install_dir          = local.vault_install_dir
+      install_dir          = global.vault_install_dir[matrix.artifact_type]
       license              = matrix.edition != "ce" ? step.read_vault_license.license : null
       local_artifact_path  = local.artifact_path
       manage_service       = local.manage_service
@@ -215,7 +226,7 @@ scenario "proxy" {
     variables {
       timeout           = 120 # seconds
       vault_hosts       = step.create_vault_cluster_targets.hosts
-      vault_install_dir = local.vault_install_dir
+      vault_install_dir = lglobal.vault_install_dir[matrix.artifact_type]
       vault_root_token  = step.create_vault_cluster.root_token
     }
   }
@@ -248,7 +259,7 @@ scenario "proxy" {
 
     variables {
       vault_hosts       = step.create_vault_cluster_targets.hosts
-      vault_install_dir = local.vault_install_dir
+      vault_install_dir = global.vault_install_dir[matrix.artifact_type]
       vault_root_token  = step.create_vault_cluster.root_token
     }
   }
@@ -264,7 +275,7 @@ scenario "proxy" {
     variables {
       vault_instances       = step.create_vault_cluster_targets.hosts
       vault_edition         = matrix.edition
-      vault_install_dir     = local.vault_install_dir
+      vault_install_dir     = global.vault_install_dir[matrix.artifact_type]
       vault_product_version = matrix.artifact_source == "local" ? step.get_local_metadata.version : var.vault_product_version
       vault_revision        = matrix.artifact_source == "local" ? step.get_local_metadata.revision : var.vault_revision
       vault_build_date      = matrix.artifact_source == "local" ? step.get_local_metadata.build_date : var.vault_build_date
@@ -281,7 +292,7 @@ scenario "proxy" {
     }
 
     variables {
-      vault_install_dir = local.vault_install_dir
+      vault_install_dir = global.vault_install_dir[matrix.artifact_type]
       vault_instances   = step.create_vault_cluster_targets.hosts
     }
   }
@@ -301,7 +312,7 @@ scenario "proxy" {
       leader_public_ip  = step.get_vault_cluster_ips.leader_public_ip
       leader_private_ip = step.get_vault_cluster_ips.leader_private_ip
       vault_instances   = step.create_vault_cluster_targets.hosts
-      vault_install_dir = local.vault_install_dir
+      vault_install_dir = global.vault_install_dir[matrix.artifact_type]
       vault_root_token  = step.create_vault_cluster.root_token
     }
   }
@@ -316,7 +327,7 @@ scenario "proxy" {
     }
 
     variables {
-      vault_install_dir = local.vault_install_dir
+      vault_install_dir = global.vault_install_dir[matrix.artifact_type]
       vault_instances   = step.create_vault_cluster_targets.hosts
       vault_root_token  = step.create_vault_cluster.root_token
     }
@@ -332,7 +343,7 @@ scenario "proxy" {
 
     variables {
       vault_edition     = matrix.edition
-      vault_install_dir = local.vault_install_dir
+      vault_install_dir = global.vault_install_dir[matrix.artifact_type]
       vault_instances   = step.create_vault_cluster_targets.hosts
     }
   }
@@ -350,7 +361,7 @@ scenario "proxy" {
 
     variables {
       node_public_ips   = step.get_vault_cluster_ips.follower_public_ips
-      vault_install_dir = local.vault_install_dir
+      vault_install_dir = global.vault_install_dir[matrix.artifact_type]
     }
   }
 

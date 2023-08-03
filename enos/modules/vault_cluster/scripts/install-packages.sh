@@ -2,7 +2,6 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: BUSL-1.1
 
-
 set -ex -o pipefail
 
 if [ "$PACKAGES" == "" ]
@@ -30,19 +29,30 @@ function retry {
   return 0
 }
 
-echo "Installing Dependencies: $PACKAGES"
-if [ -f /etc/debian_version ]; then
-  # Do our best to make sure that we don't race with cloud-init. Wait a reasonable time until we
-  # see ec2 in the sources list. Very rarely cloud-init will take longer than we wait. In that case
-  # we'll just install our packages.
-  retry 7 grep ec2 /etc/apt/sources.list || true
+# Wait for cloud-init to finish so it doesn't race with any of our package installations.
+# Note: Amazon Linux 2 throws Python 2.7 errors when running `cloud-init status` as
+# non-root user (known bug).
+sudo cloud-init status --wait
 
+echo "Installing Dependencies: $PACKAGES"
+
+# Use the default package manager of the current Linux distro to install packages
+if [ "$PACKAGE_MANAGER" = "apt" ]; then
   cd /tmp
-  retry 5 sudo apt update
-  # shellcheck disable=2068
-  retry 5 sudo apt install -y ${PACKAGES[@]}
+  sudo apt update
+  sudo apt install -y ${PACKAGES[@]}
+elif [ "$PACKAGE_MANAGER" = "yum" ]; then
+  cd /tmp
+  sudo yum -y install ${PACKAGES[@]}
+elif [ "$PACKAGE_MANAGER" = "zypper" ]; then
+  # Note: SUSE distros use zypper. for SLES 12.5 SP5, some packages are not offered
+  # in an official repo. If the first install step fails, we instead attempt to
+  # register with PackageHub,SUSE's third party package marketplace, and then find
+  # and install the package from there.
+  
+  # TO DO: Don't hardcode version/arch
+  sudo zypper install --no-confirm ${PACKAGES[@]} || ( sudo SUSEConnect -p PackageHub/$SLES_VERSION/$ARCH && sudo zypper install --no-confirm ${PACKAGES[@]})
 else
-  cd /tmp
-  # shellcheck disable=2068
-  retry 7 sudo yum -y install ${PACKAGES[@]}
+  echo "No matching package manager provided."
+  exit 1
 fi

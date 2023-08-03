@@ -5,7 +5,8 @@ provider "aws" "default" {
   region = var.aws_region
 }
 
-provider "enos" "rhel" {
+# This default SSH user is used in RHEL, Amazon Linux, SUSE, and Leap distros
+provider "enos" "ec2_user" {
   transport = {
     ssh = {
       user             = "ec2-user"
@@ -14,10 +15,21 @@ provider "enos" "rhel" {
   }
 }
 
+# This default SSH user is used in the Ubuntu distro
 provider "enos" "ubuntu" {
   transport = {
     ssh = {
       user             = "ubuntu"
+      private_key_path = abspath(var.aws_ssh_private_key_path)
+    }
+  }
+}
+
+# TO DO: remove later once all scenarios are updated; leaving in to not break other scenarios
+provider "enos" "rhel" {
+  transport = {
+    ssh = {
+      user             = "ec2-user"
       private_key_path = abspath(var.aws_ssh_private_key_path)
     }
   }
