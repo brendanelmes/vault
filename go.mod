@@ -78,6 +78,7 @@ require (
 	github.com/hashicorp/cap/ldap v0.0.0-20230914221201-c4eecc7e31f7
 	github.com/hashicorp/consul-template v0.33.0
 	github.com/hashicorp/consul/api v1.23.0
+	github.com/hashicorp/consul/sdk v0.14.0
 	github.com/hashicorp/errwrap v1.1.0
 	github.com/hashicorp/eventlogger v0.2.5
 	github.com/hashicorp/go-bexpr v0.1.12
@@ -95,7 +96,7 @@ require (
 	github.com/hashicorp/go-kms-wrapping/wrappers/ocikms/v2 v2.0.7
 	github.com/hashicorp/go-kms-wrapping/wrappers/transit/v2 v2.0.8
 	github.com/hashicorp/go-memdb v1.3.4
-	github.com/hashicorp/go-msgpack v1.1.5
+	github.com/hashicorp/go-msgpack/v2 v2.1.1
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/hashicorp/go-plugin v1.5.2
 	github.com/hashicorp/go-raftchunking v0.6.3-0.20191002164813-7e9e8525653a
@@ -123,7 +124,7 @@ require (
 	github.com/hashicorp/hcp-scada-provider v0.2.1
 	github.com/hashicorp/hcp-sdk-go v0.23.0
 	github.com/hashicorp/nomad/api v0.0.0-20230519153805-2275a83cbfdf
-	github.com/hashicorp/raft v1.3.10
+	github.com/hashicorp/raft v1.4.0
 	github.com/hashicorp/raft-autopilot v0.2.0
 	github.com/hashicorp/raft-boltdb/v2 v2.0.0-20210421194847-a7e34179d62c
 	github.com/hashicorp/raft-snapshot v1.0.4
@@ -216,11 +217,11 @@ require (
 	golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1
 	golang.org/x/net v0.17.0
 	golang.org/x/oauth2 v0.11.0
-	golang.org/x/sync v0.3.0
+	golang.org/x/sync v0.4.0
 	golang.org/x/sys v0.13.0
 	golang.org/x/term v0.13.0
 	golang.org/x/text v0.13.0
-	golang.org/x/tools v0.10.0
+	golang.org/x/tools v0.14.0
 	google.golang.org/api v0.138.0
 	google.golang.org/grpc v1.58.3
 	google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.1.0
@@ -297,6 +298,7 @@ require (
 	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bgentry/speakeasy v0.1.0 // indirect
+	github.com/boltdb/bolt v1.3.1 // indirect
 	github.com/boombuler/barcode v1.0.1 // indirect
 	github.com/cenkalti/backoff v2.2.1+incompatible // indirect
 	github.com/cenkalti/backoff/v4 v4.2.0 // indirect
@@ -384,7 +386,6 @@ require (
 	github.com/hashicorp/cronexpr v1.1.1 // indirect
 	github.com/hashicorp/go-immutable-radix v1.3.1 // indirect
 	github.com/hashicorp/go-metrics v0.5.1 // indirect
-	github.com/hashicorp/go-msgpack/v2 v2.0.0 // indirect
 	github.com/hashicorp/go-secure-stdlib/fileutil v0.1.0 // indirect
 	github.com/hashicorp/go-secure-stdlib/plugincontainer v0.2.2 // indirect
 	github.com/hashicorp/go-slug v0.12.1 // indirect
@@ -512,7 +513,7 @@ require (
 	go.uber.org/multierr v1.7.0 // indirect
 	go.uber.org/zap v1.19.1 // indirect
 	golang.org/x/exp/typeparams v0.0.0-20221208152030-732eee02a75a // indirect
-	golang.org/x/mod v0.12.0 // indirect
+	golang.org/x/mod v0.13.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
@@ -536,3 +537,9 @@ require (
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.3 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
+
+replace github.com/hashicorp/raft => /Users/swenson/projects/raft
+
+replace github.com/hashicorp/raft-boltdb => /Users/swenson/projects/raft-boltdb
+
+replace github.com/hashicorp/raft-boltdb/v2 => /Users/swenson/projects/raft-boltdb/v2
