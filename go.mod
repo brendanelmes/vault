@@ -117,16 +117,16 @@ require (
 	github.com/hashicorp/go-syslog v1.0.0
 	github.com/hashicorp/go-uuid v1.0.3
 	github.com/hashicorp/go-version v1.6.0
-	github.com/hashicorp/golang-lru v0.5.4
+	github.com/hashicorp/golang-lru v1.0.2
 	github.com/hashicorp/hcl v1.0.1-vault-5
 	github.com/hashicorp/hcl/v2 v2.16.2
 	github.com/hashicorp/hcp-link v0.1.0
 	github.com/hashicorp/hcp-scada-provider v0.2.1
 	github.com/hashicorp/hcp-sdk-go v0.23.0
 	github.com/hashicorp/nomad/api v0.0.0-20230519153805-2275a83cbfdf
-	github.com/hashicorp/raft v1.4.0
+	github.com/hashicorp/raft v1.5.1-0.20231024165115-d79654935a01
 	github.com/hashicorp/raft-autopilot v0.2.0
-	github.com/hashicorp/raft-boltdb/v2 v2.0.0-20210421194847-a7e34179d62c
+	github.com/hashicorp/raft-boltdb/v2 v2.2.3-0.20231024164814-4cd9b96914bd
 	github.com/hashicorp/raft-snapshot v1.0.4
 	github.com/hashicorp/vault-plugin-auth-alicloud v0.16.0
 	github.com/hashicorp/vault-plugin-auth-azure v0.16.2
@@ -169,7 +169,7 @@ require (
 	github.com/kr/pretty v0.3.1
 	github.com/kr/text v0.2.0
 	github.com/mattn/go-colorable v0.1.13
-	github.com/mattn/go-isatty v0.0.19
+	github.com/mattn/go-isatty v0.0.20
 	github.com/mholt/archiver/v3 v3.5.1
 	github.com/michaelklishin/rabbit-hole/v2 v2.12.0
 	github.com/mikesmitty/edkey v0.0.0-20170222072505-3356ea4e686a
@@ -537,9 +537,3 @@ require (
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.3 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
-
-replace github.com/hashicorp/raft => /Users/swenson/projects/raft
-
-replace github.com/hashicorp/raft-boltdb => /Users/swenson/projects/raft-boltdb
-
-replace github.com/hashicorp/raft-boltdb/v2 => /Users/swenson/projects/raft-boltdb/v2
