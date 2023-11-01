@@ -133,6 +133,7 @@ scenario "autopilot" {
     }
 
     variables {
+      arch                    = matrix.arch
       # awskms_unseal_key_arn = step.create_vpc.kms_key_arn
       cluster_name          = step.create_vault_cluster_targets.cluster_name
       distro_version_sles   = var.distro_version_sles
@@ -235,6 +236,7 @@ scenario "autopilot" {
     }
 
     variables {
+      arch                    = matrix.arch
       artifactory_release         = matrix.artifact_source == "artifactory" ? step.build_vault.vault_artifactory_release : null
       enable_audit_devices        = var.vault_enable_audit_devices
       cluster_name                = step.create_vault_cluster_targets.cluster_name

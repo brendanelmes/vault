@@ -21,10 +21,10 @@ locals {
       ubuntu = "-1_amd64.deb"
     }
     arm64 = {
-      amazon_linux = "-1.x86_64.rpm"
-      leap = "-1.x86_64.rpm"
-      rhel   = "-1.x86_64.rpm"
-      ubuntu = "-1_amd64.deb"
+      amazon_linux = "-1.aarch64.rpm"
+      leap = "-1.aarch64.rpm"
+      rhel   = "-1.aarch64.rpm"
+      ubuntu = "-1_arm64.deb"
       # Note: SLES not included here because the versions/editions of SLES we use
       # are only offered for amd64
     }

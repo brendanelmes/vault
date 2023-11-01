@@ -116,7 +116,7 @@ variable "initialize_cluster" {
 
 variable "install_dir" {
   type        = string
-  description = "The directory where the vault binary will be installed"
+  description = "The directory where the Vault binary will be installed"
   default     = "/opt/vault/bin"
 }
 

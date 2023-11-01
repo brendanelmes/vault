@@ -49,9 +49,13 @@ elif [ "$PACKAGE_MANAGER" = "zypper" ]; then
   # in an official repo. If the first install step fails, we instead attempt to
   # register with PackageHub,SUSE's third party package marketplace, and then find
   # and install the package from there.
-  
-  # TO DO: Don't hardcode version/arch
   sudo zypper install --no-confirm ${PACKAGES[@]} || ( sudo SUSEConnect -p PackageHub/$SLES_VERSION/$ARCH && sudo zypper install --no-confirm ${PACKAGES[@]})
+  # For SUSE distros on arm64 architecture, we need to manually install these two
+  # packages in order to install Vault RPM packages later.
+  if [ "$ARCH" = "aarch64" ]; then
+    sudo zypper install --no-confirm libcap-progs
+    sudo zypper install --no-confirm openssl
+  fi
 else
   echo "No matching package manager provided."
   exit 1

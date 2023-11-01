@@ -190,6 +190,7 @@ scenario "agent" {
     }
 
     variables {
+      arch                    = matrix.arch
       artifactory_release     = matrix.artifact_source == "artifactory" ? step.build_vault.vault_artifactory_release : null
       backend_cluster_name    = step.create_vault_cluster_backend_targets.cluster_name
       backend_cluster_tag_key = global.backend_tag_key

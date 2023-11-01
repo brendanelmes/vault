@@ -7,6 +7,7 @@ scenario "proxy" {
     artifact_source = ["local", "crt", "artifactory"]
     artifact_type   = ["bundle", "package"]
     backend         = ["consul", "raft"]
+    consul_edition  = ["ce", "ent"]
     consul_version  = ["1.12.9", "1.13.9", "1.14.9", "1.15.5", "1.16.1"]
     distro          = ["amazon_linux", "leap", "rhel", "sles", "ubuntu"]
     edition         = ["ce", "ent", "ent.fips1402", "ent.hsm", "ent.hsm.fips1402"]
@@ -51,7 +52,7 @@ scenario "proxy" {
       ubuntu       = provider.enos.ubuntu
     }
     manage_service    = matrix.artifact_type == "bundle"
-    vault_install_dir = matrix.artifact_type == "bundle" ? var.vault_install_dir : global.vault_install_dir_packages[matrix.distro]
+    vault_install_dir = global.vault_install_dir[matrix.artifact_type]
   }
 
   step "get_local_metadata" {
@@ -104,7 +105,7 @@ scenario "proxy" {
   // This step reads the contents of the backend license if we're using a Consul backend and
   // the edition is "ent".
   step "read_backend_license" {
-    skip_step = matrix.backend == "raft" || var.backend_edition == "ce"
+    skip_step = matrix.backend == "raft" || matrix.consul_edition == "ce"
     module    = module.read_license
 
     variables {
@@ -168,9 +169,9 @@ scenario "proxy" {
     variables {
       cluster_name    = step.create_vault_cluster_backend_targets.cluster_name
       cluster_tag_key = global.backend_tag_key
-      license         = (matrix.backend == "consul" && var.backend_edition == "ent") ? step.read_backend_license.license : null
+      license         = (matrix.backend == "consul" && matrix.consul_edition == "ent") ? step.read_backend_license.license : null
       release = {
-        edition = var.backend_edition
+        edition = matrix.consul_edition
         version = matrix.consul_version
       }
       target_hosts = step.create_vault_cluster_backend_targets.hosts
@@ -190,13 +191,14 @@ scenario "proxy" {
     }
 
     variables {
+      arch                    = matrix.arch
       artifactory_release     = matrix.artifact_source == "artifactory" ? step.build_vault.vault_artifactory_release : null
       backend_cluster_name    = step.create_vault_cluster_backend_targets.cluster_name
       backend_cluster_tag_key = global.backend_tag_key
       cluster_name            = step.create_vault_cluster_targets.cluster_name
-      consul_license          = (matrix.backend == "consul" && var.backend_edition == "ent") ? step.read_backend_license.license : null
+      consul_license          = (matrix.backend == "consul" && matrix.consul_edition == "ent") ? step.read_backend_license.license : null
       consul_release = matrix.backend == "consul" ? {
-        edition = var.backend_edition
+        edition = matrix.consul_edition
         version = matrix.consul_version
       } : null
       distro_version_sles  = var.distro_version_sles
@@ -205,6 +207,7 @@ scenario "proxy" {
       license              = matrix.edition != "ce" ? step.read_vault_license.license : null
       local_artifact_path  = local.artifact_path
       manage_service       = local.manage_service
+      package_manager      = global.package_manager[matrix.distro]
       packages             = concat(global.packages, global.distro_packages[matrix.distro])
       seal_ha_beta         = matrix.seal_ha_beta
       seal_key_name        = step.create_seal_key.resource_name
@@ -226,7 +229,7 @@ scenario "proxy" {
     variables {
       timeout           = 120 # seconds
       vault_hosts       = step.create_vault_cluster_targets.hosts
-      vault_install_dir = lglobal.vault_install_dir[matrix.artifact_type]
+      vault_install_dir = global.vault_install_dir[matrix.artifact_type]
       vault_root_token  = step.create_vault_cluster.root_token
     }
   }
@@ -243,7 +246,7 @@ scenario "proxy" {
     }
 
     variables {
-      vault_install_dir = local.vault_install_dir
+      vault_install_dir = global.vault_install_dir[matrix.artifact_type]
       vault_instances   = step.create_vault_cluster_targets.hosts
       vault_root_token  = step.create_vault_cluster.root_token
     }
