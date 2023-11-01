@@ -2143,8 +2143,8 @@ github.com/hashicorp/vault-plugin-database-couchbase v0.9.4 h1:MaKlz3Guy9eVRJvTM
 github.com/hashicorp/vault-plugin-database-couchbase v0.9.4/go.mod h1:0cDXDEOSZt7mwBxOa4w2mIK1sioIv2jtflbODK5ZF10=
 github.com/hashicorp/vault-plugin-database-elasticsearch v0.13.3 h1:ngkRoBWXMsfkr6zTbn70z0WWMh7gtfMf0gjtR3k/lSA=
 github.com/hashicorp/vault-plugin-database-elasticsearch v0.13.3/go.mod h1:svc2PX2PaxcMmcixrCSPlgFdpRema0yDzc5WIzejvtg=
-github.com/hashicorp/vault-plugin-database-mongodbatlas v0.10.1 h1:st8aNVyXyiHpAq8CTWfxj1uGQHnggA5Hsg5ug0Qv2UA=
-github.com/hashicorp/vault-plugin-database-mongodbatlas v0.10.1/go.mod h1:rFvNp9rYOFPwAPFUHcGnRIwOlAYBPZHgKul/Sj2poPs=
+github.com/hashicorp/vault-plugin-database-mongodbatlas v0.10.2-0.20231101001601-17ca146d9caa h1:du1ZUHa5/EIFr+g2yU6nqshOA7vrFIG0QYIwD0PkEqc=
+github.com/hashicorp/vault-plugin-database-mongodbatlas v0.10.2-0.20231101001601-17ca146d9caa/go.mod h1:dDnRru5m+li+96eieJ7mUItw4w7PjCkyOemwT4iAZSQ=
 github.com/hashicorp/vault-plugin-database-redis v0.2.2 h1:nMpNIDP1Cvw5aMLXp3ObvXmv5c2X3GqBmoPNMtvWe5E=
 github.com/hashicorp/vault-plugin-database-redis v0.2.2/go.mod h1:POHYpUTsdJwGE1DSHaDlLjB/CpzBHLfIIVVXElBtbcs=
 github.com/hashicorp/vault-plugin-database-redis-elasticache v0.2.3 h1:Y2/teLlrYR80LATq4T2EZJgeQFkYUvExH1WUfssi2IU=
@@ -3108,8 +3108,8 @@ go.etcd.io/etcd/raft/v3 v3.5.5/go.mod h1:76TA48q03g1y1VpTue92jZLr9lIHKUNcYdZOOGy
 go.etcd.io/etcd/server/v3 v3.5.0/go.mod h1:3Ah5ruV+M+7RZr0+Y/5mNLwC+eQlni+mQmOVdCRJoS4=
 go.etcd.io/etcd/server/v3 v3.5.5/go.mod h1:rZ95vDw/jrvsbj9XpTqPrTAB9/kzchVdhRirySPkUBc=
 go.etcd.io/gofail v0.1.0/go.mod h1:VZBCXYGZhHAinaBiiqYvuDynvahNsAyLFwB3kEHKz1M=
-go.mongodb.org/atlas v0.33.0 h1:qJhkEuJufh7sVDVHorTF/D7G7naQ1EJAzqf1aV29JWs=
-go.mongodb.org/atlas v0.33.0/go.mod h1:L4BKwVx/OeEhOVjCSdgo90KJm4469iv7ZLzQms/EPTg=
+go.mongodb.org/atlas v0.35.0 h1:fLSPEyv+QcrG5djPWMekaM+BEVfEVBKQO4yEUQl4CQ4=
+go.mongodb.org/atlas v0.35.0/go.mod h1:nfPldE9dSama6G2IbIzmEza02Ly7yFZjMMVscaM0uEc=
 go.mongodb.org/mongo-driver v1.0.3/go.mod h1:u7ryQJ+DOzQmeO7zB6MHyr8jkEQvC8vH7qLUO4lqsUM=
 go.mongodb.org/mongo-driver v1.1.1/go.mod h1:u7ryQJ+DOzQmeO7zB6MHyr8jkEQvC8vH7qLUO4lqsUM=
 go.mongodb.org/mongo-driver v1.3.0/go.mod h1:MSWZXKOynuguX+JSvwP8i+58jYCXxbia8HS3gZBapIE=
