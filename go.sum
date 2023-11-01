@@ -2149,8 +2149,8 @@ github.com/hashicorp/vault-plugin-database-redis v0.2.2 h1:nMpNIDP1Cvw5aMLXp3Obv
 github.com/hashicorp/vault-plugin-database-redis v0.2.2/go.mod h1:POHYpUTsdJwGE1DSHaDlLjB/CpzBHLfIIVVXElBtbcs=
 github.com/hashicorp/vault-plugin-database-redis-elasticache v0.2.3 h1:Y2/teLlrYR80LATq4T2EZJgeQFkYUvExH1WUfssi2IU=
 github.com/hashicorp/vault-plugin-database-redis-elasticache v0.2.3/go.mod h1:eGj+U2NroyrtKqdNAoOG7is2mbmSIoTvDA0EETqWTDI=
-github.com/hashicorp/vault-plugin-database-snowflake v0.9.0 h1:kYr7DXkxuznPstyvt0HQ6HfMBv7M3agGjDcgiOJuxm4=
-github.com/hashicorp/vault-plugin-database-snowflake v0.9.0/go.mod h1:szELJH+NFTZPB4KbmIkcBD3E+BfVVdew7YCOFW7u2LY=
+github.com/hashicorp/vault-plugin-database-snowflake v0.9.1-0.20231101001255-d61bdfa71d04 h1:Y6p9YrQ3rLxmjJZJ8voRNDtJUkuHsxphnQUwVLNXmpU=
+github.com/hashicorp/vault-plugin-database-snowflake v0.9.1-0.20231101001255-d61bdfa71d04/go.mod h1:+wQDUqjDzZL01IwyObR2EniPQvUy1HgXoGK5iSt8958=
 github.com/hashicorp/vault-plugin-mock v0.16.1 h1:5QQvSUHxDjEEbrd2REOeacqyJnCLPD51IQzy71hx8P0=
 github.com/hashicorp/vault-plugin-mock v0.16.1/go.mod h1:83G4JKlOwUtxVourn5euQfze3ZWyXcUiLj2wqrKSDIM=
 github.com/hashicorp/vault-plugin-secrets-ad v0.16.1 h1:Ns0/JcpOrC3+yCYcV9+SbehfRkob1pB793VILE1yo2E=
@@ -2903,8 +2903,8 @@ github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d/go.mod h1
 github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a/go.mod h1:syvi0/a8iFYH4r/RixwvyeAJjdLS9QV7WQ/tjFTllLA=
 github.com/smartystreets/goconvey v1.6.4 h1:fv0U8FUIMPNf1L9lnHLvLhgicrIVChEkdzIKYqbNC9s=
 github.com/smartystreets/goconvey v1.6.4/go.mod h1:syvi0/a8iFYH4r/RixwvyeAJjdLS9QV7WQ/tjFTllLA=
-github.com/snowflakedb/gosnowflake v1.6.24 h1:NiBh1WSstNtr12qywmdFMS1XHaYdF5iWWGnjIQb1cEY=
-github.com/snowflakedb/gosnowflake v1.6.24/go.mod h1:KfO4F7bk+aXPUIvBqYxvPhxLlu2/w4TtSC8Rw/yr5Mg=
+github.com/snowflakedb/gosnowflake v1.6.25 h1:o5zUmxTOo0Eo9AdkEj8blCeiMuILrQJ+rjUMAeZhcRE=
+github.com/snowflakedb/gosnowflake v1.6.25/go.mod h1:KfO4F7bk+aXPUIvBqYxvPhxLlu2/w4TtSC8Rw/yr5Mg=
 github.com/softlayer/softlayer-go v0.0.0-20180806151055-260589d94c7d h1:bVQRCxQvfjNUeRqaY/uT0tFuvuFY0ulgnczuR684Xic=
 github.com/softlayer/softlayer-go v0.0.0-20180806151055-260589d94c7d/go.mod h1:Cw4GTlQccdRGSEf6KiMju767x0NEHE0YIVPJSaXjlsw=
 github.com/soheilhy/cmux v0.1.4/go.mod h1:IM3LyeVVIOuxMH7sFAkER9+bJ4dT7Ms6E4xg4kGIyLM=
