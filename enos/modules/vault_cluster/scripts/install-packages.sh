@@ -26,10 +26,10 @@ elif [ "$PACKAGE_MANAGER" = "yum" ]; then
   cd /tmp
   sudo yum -y install ${PACKAGES[@]}
 elif [ "$PACKAGE_MANAGER" = "zypper" ]; then
-  # Note: SUSE distros use zypper. for SLES 12.5 SP5, some packages are not offered
-  # in an official repo. If the first install step fails, we instead attempt to
-  # register with PackageHub,SUSE's third party package marketplace, and then find
-  # and install the package from there.
+  # Note: For some SUSE distro versions, and/or some packages, the
+  # packages may not be offered in an official repo. If the first install step
+  # fails, we instead attempt to register with PackageHub,SUSE's third party
+  # package marketplace, and then find and install the package from there.
 
   # Disable this shellcheck rule about double-quoting array expansions; if we use
   # double quotes on ${PACKAGES[@]}, it does not take the packages as separate
