@@ -24,7 +24,6 @@ locals {
     "package_manager" = var.package_manager
   }
   distro_version_sles = {
-    "v12_sp5_standard" = "12.5"
     "v15_sp4_standard" = "15.4"
     "v15_sp5_standard" = "15.5"
   }

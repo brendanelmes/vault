@@ -44,7 +44,7 @@
 # distro_version_rhel = "9.1" // or "8.8"
 
 # distro_version_sles is the version of SUSE SLES to use for "distro:sles" variants.
-# distro_version_sles = "v15_sp5_standard" // or "v12_sp5_standard", "v15_sp4_standard"
+# distro_version_sles = "v15_sp5_standard" // or "v15_sp4_standard"
 
 # distro_version_ubuntu is the version of ubuntu to use for "distro:ubuntu" variants
 # distro_version_ubuntu = "22.04" // or "20.04", "18.04"

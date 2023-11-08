@@ -52,7 +52,6 @@ locals {
         "15.5" = data.aws_ami.leap_155["x86_64"].id
       }
       "sles" = {
-        "v12_sp5_standard" = data.aws_ami.sles_12_sp5_standard.id
         "v15_sp4_standard" = data.aws_ami.sles_15_sp4_standard["x86_64"].id
         "v15_sp5_standard" = data.aws_ami.sles_15_sp5_standard["x86_64"].id
       }
