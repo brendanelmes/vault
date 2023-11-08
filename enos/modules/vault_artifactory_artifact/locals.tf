@@ -15,16 +15,16 @@ locals {
   package_extensions = {
     amd64 = {
       amazon_linux = "-1.x86_64.rpm"
-      leap = "-1.x86_64.rpm"
-      rhel   = "-1.x86_64.rpm"
-      sles = "-1.x86_64.rpm"
-      ubuntu = "-1_amd64.deb"
+      leap         = "-1.x86_64.rpm"
+      rhel         = "-1.x86_64.rpm"
+      sles         = "-1.x86_64.rpm"
+      ubuntu       = "-1_amd64.deb"
     }
     arm64 = {
       amazon_linux = "-1.aarch64.rpm"
-      leap = "-1.aarch64.rpm"
-      rhel   = "-1.aarch64.rpm"
-      ubuntu = "-1_arm64.deb"
+      leap         = "-1.aarch64.rpm"
+      rhel         = "-1.aarch64.rpm"
+      ubuntu       = "-1_arm64.deb"
       # Note: SLES not included here because the versions/editions of SLES we use
       # are only offered for amd64
     }
@@ -57,7 +57,7 @@ locals {
       "ent.hsm.fips1402" = "vault-enterprise-hsm-fips1402-",
     },
     sles = {
-      "ce"              = "vault-"
+      "ce"               = "vault-"
       "ent"              = "vault-enterprise-",
       "ent.fips1402"     = "vault-enterprise-fips1402-",
       "ent.hsm"          = "vault-enterprise-hsm-",
@@ -84,7 +84,7 @@ locals {
   # Bundles will get the form: vault_
 
   # Prefix for the artifact name. Ex: vault_, vault-, vault-enterprise_, vault-enterprise-hsm-fips1402-
-  artifact_name_prefix    = var.artifact_type == "package" ? local.artifact_package_release_names[var.distro][var.edition] : "vault_"
+  artifact_name_prefix = var.artifact_type == "package" ? local.artifact_package_release_names[var.distro][var.edition] : "vault_"
   # Suffix and extension for the artifact name. Ex: _linux_<arch>.zip, 
   artifact_name_extension = var.artifact_type == "package" ? local.package_extensions[var.arch][var.distro] : "_linux_${var.arch}.zip"
   artifact_name           = var.artifact_type == "package" ? "${local.artifact_name_prefix}${replace(local.artifact_version, "-", "~")}${local.artifact_name_extension}" : "${local.artifact_name_prefix}${var.product_version}${local.artifact_name_extension}"

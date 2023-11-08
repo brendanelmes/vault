@@ -20,7 +20,7 @@ locals {
       "amd64" = "x86_64"
       "arm64" = "aarch64"
     }
-    "packages" = join(" ", var.packages)
+    "packages"        = join(" ", var.packages)
     "package_manager" = var.package_manager
   }
   distro_version_sles = {
@@ -83,7 +83,7 @@ resource "enos_remote_exec" "install_rpm_dependencies" {
   }
 
   environment = {
-    ARCH = local.package_install_env.arch[var.arch]
+    ARCH            = local.package_install_env.arch[var.arch]
     PACKAGE_MANAGER = local.package_install_env["package_manager"]
   }
 
@@ -124,10 +124,10 @@ resource "enos_remote_exec" "install_packages" {
   }
 
   environment = {
-    ARCH = local.package_install_env.arch[var.arch]
-    PACKAGES = local.package_install_env["packages"]
+    ARCH            = local.package_install_env.arch[var.arch]
+    PACKAGES        = local.package_install_env["packages"]
     PACKAGE_MANAGER = local.package_install_env["package_manager"]
-    SLES_VERSION = local.distro_version_sles[var.distro_version_sles]
+    SLES_VERSION    = local.distro_version_sles[var.distro_version_sles]
   }
 
   scripts = [abspath("${path.module}/scripts/install-packages.sh")]

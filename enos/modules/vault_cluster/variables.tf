@@ -222,9 +222,9 @@ variable "shamir_unseal_keys" {
 }
 
 variable "distro_version_sles" {
-  type = string
+  type        = string
   description = "The SLES distro version; sometimes required to install packages on certain SLES versions"
-  default = "15.5" // 15.4 or 12.5
+  default     = "15.5" // 15.4 or 12.5
 }
 
 variable "storage_backend" {
