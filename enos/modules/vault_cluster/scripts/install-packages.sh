@@ -30,6 +30,11 @@ elif [ "$PACKAGE_MANAGER" = "zypper" ]; then
   # in an official repo. If the first install step fails, we instead attempt to
   # register with PackageHub,SUSE's third party package marketplace, and then find
   # and install the package from there.
+
+  # Disable this shellcheck rule about double-quoting array expansions; if we use
+  # double quotes on ${PACKAGES[@]}, it does not take the packages as separate
+  # arguments.
+  # shellcheck disable=SC2068
   sudo zypper install --no-confirm ${PACKAGES[@]} || ( sudo SUSEConnect -p PackageHub/$SLES_VERSION/$ARCH && sudo zypper install --no-confirm ${PACKAGES[@]})
   # For SUSE distros on arm64 architecture, we need to manually install these two
   # packages in order to install Vault RPM packages later.
