@@ -7,7 +7,7 @@ scenario "seal_ha" {
     artifact_source = ["local", "crt", "artifactory"]
     artifact_type   = ["bundle", "package"]
     backend         = ["consul", "raft"]
-    consul_edition    = ["ce", "ent"]
+    consul_edition  = ["ce", "ent"]
     consul_version  = ["1.12.9", "1.13.9", "1.14.9", "1.15.5", "1.16.1"]
     distro          = ["amazon_linux", "leap", "rhel", "sles", "ubuntu"]
     edition         = ["ent", "ent.fips1402", "ent.hsm", "ent.hsm.fips1402"]
@@ -51,7 +51,7 @@ scenario "seal_ha" {
       sles         = provider.enos.ec2_user
       ubuntu       = provider.enos.ubuntu
     }
-    manage_service    = matrix.artifact_type == "bundle"
+    manage_service = matrix.artifact_type == "bundle"
   }
 
   step "get_local_metadata" {
@@ -212,13 +212,13 @@ scenario "seal_ha" {
         edition = matrix.consul_edition
         version = matrix.consul_version
       } : null
-      distro_version_sles   = var.distro_version_sles
+      distro_version_sles  = var.distro_version_sles
       enable_audit_devices = var.vault_enable_audit_devices
       install_dir          = global.vault_install_dir[matrix.artifact_type]
       license              = matrix.edition != "ce" ? step.read_vault_license.license : null
       local_artifact_path  = local.artifact_path
       manage_service       = local.manage_service
-      package_manager       = global.package_manager[matrix.distro]
+      package_manager      = global.package_manager[matrix.distro]
       packages             = concat(global.packages, global.distro_packages[matrix.distro])
       // Only configure our primary seal during our initial cluster setup
       seal_type       = matrix.primary_seal

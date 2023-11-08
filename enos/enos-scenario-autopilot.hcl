@@ -51,7 +51,7 @@ scenario "autopilot" {
       sles         = provider.enos.ec2_user
       ubuntu       = provider.enos.ubuntu
     }
-    manage_service    = matrix.artifact_type == "bundle"
+    manage_service = matrix.artifact_type == "bundle"
   }
 
   step "build_vault" {
@@ -133,15 +133,14 @@ scenario "autopilot" {
     }
 
     variables {
-      arch                    = matrix.arch
-      # awskms_unseal_key_arn = step.create_vpc.kms_key_arn
-      cluster_name          = step.create_vault_cluster_targets.cluster_name
-      distro_version_sles   = var.distro_version_sles
+      arch                 = matrix.arch
+      cluster_name         = step.create_vault_cluster_targets.cluster_name
+      distro_version_sles  = var.distro_version_sles
       enable_audit_devices = var.vault_enable_audit_devices
-      install_dir           = global.vault_install_dir[matrix.artifact_type]
-      license               = matrix.edition != "ce" ? step.read_license.license : null
-      package_manager       = global.package_manager[matrix.distro]
-      packages              = concat(global.packages, global.distro_packages[matrix.distro])
+      install_dir          = global.vault_install_dir[matrix.artifact_type]
+      license              = matrix.edition != "ce" ? step.read_license.license : null
+      package_manager      = global.package_manager[matrix.distro]
+      packages             = concat(global.packages, global.distro_packages[matrix.distro])
       release = {
         edition = matrix.edition
         version = matrix.initial_version
@@ -236,7 +235,7 @@ scenario "autopilot" {
     }
 
     variables {
-      arch                    = matrix.arch
+      arch                        = matrix.arch
       artifactory_release         = matrix.artifact_source == "artifactory" ? step.build_vault.vault_artifactory_release : null
       enable_audit_devices        = var.vault_enable_audit_devices
       cluster_name                = step.create_vault_cluster_targets.cluster_name

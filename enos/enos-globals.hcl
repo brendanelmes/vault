@@ -36,7 +36,12 @@ globals {
   sample_attributes = {
     # NOTE(9/28/23): Temporarily use us-east-2 due to another networking in us-east-1
     # aws_region = ["us-east-1", "us-west-2"]
-    aws_region = ["us-east-2", "us-west-2"]
+    aws_region                  = ["us-east-2", "us-west-2"]
+    distro_version_amazon_linux = ["amzn2"]
+    distro_version_leap         = ["15.4", "15.5"]
+    distro_version_rhel         = ["8.8", "9.1"]
+    distro_version_sles         = ["v15_sp4_standard", "v15_sp5_standard"]
+    distro_version_ubuntu       = ["18.04", "20.04", "22.04"]
   }
   tags = merge({
     "Project Name" : var.project_name
@@ -44,7 +49,7 @@ globals {
     "Environment" : "ci"
   }, var.tags)
   vault_install_dir = {
-    bundle = "/opt/vault/bin"
+    bundle  = "/opt/vault/bin"
     package = "/usr/bin"
   }
   vault_license_path = abspath(var.vault_license_path != null ? var.vault_license_path : joinpath(path.root, "./support/vault.hclic"))

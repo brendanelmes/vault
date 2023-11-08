@@ -6,7 +6,7 @@ scenario "ui" {
     edition        = ["ce", "ent"]
     backend        = ["consul", "raft"]
     consul_edition = ["ce", "ent"]
-    seal_ha_beta = ["true", "false"]
+    seal_ha_beta   = ["true", "false"]
   }
 
   terraform_cli = terraform_cli.default
@@ -108,7 +108,7 @@ scenario "ui" {
     }
 
     variables {
-      ami_id          = step.ec2_info.ami_ids[local.arch][local.distro][var.ubuntu_distro_version]
+      ami_id          = step.ec2_info.ami_ids[local.arch][local.distro][var.distro_version_ubuntu]
       cluster_tag_key = local.vault_tag_key
       common_tags     = local.tags
       seal_key_names  = step.create_seal_key.resource_names
@@ -168,6 +168,7 @@ scenario "ui" {
     }
 
     variables {
+      arch                    = local.arch
       backend_cluster_name    = step.create_vault_cluster_backend_targets.cluster_name
       backend_cluster_tag_key = local.backend_tag_key
       cluster_name            = step.create_vault_cluster_targets.cluster_name
@@ -181,6 +182,7 @@ scenario "ui" {
       install_dir          = local.vault_install_dir
       license              = matrix.edition != "ce" ? step.read_vault_license.license : null
       local_artifact_path  = local.bundle_path
+      package_manager      = global.package_manager[local.distro]
       packages             = global.distro_packages["ubuntu"]
       seal_ha_beta         = matrix.seal_ha_beta
       seal_key_name        = step.create_seal_key.resource_name

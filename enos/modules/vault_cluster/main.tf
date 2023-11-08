@@ -74,7 +74,32 @@ resource "enos_bundle_install" "consul" {
   }
 }
 
+# For openSUSE Leap on arm64 architecture, we need to manually install some
+# packages in order to install Vault RPM packages later.
+resource "enos_remote_exec" "install_rpm_dependencies" {
+  for_each = {
+    for idx, host in var.target_hosts : idx => var.target_hosts[idx]
+    if length(var.packages) > 0
+  }
+
+  environment = {
+    ARCH = local.package_install_env.arch[var.arch]
+    PACKAGE_MANAGER = local.package_install_env["package_manager"]
+  }
+
+  scripts = [abspath("${path.module}/scripts/install-rpm-dependencies.sh")]
+
+  transport = {
+    ssh = {
+      host = each.value.public_ip
+    }
+  }
+}
+
 resource "enos_bundle_install" "vault" {
+  depends_on = [
+    enos_remote_exec.install_rpm_dependencies,
+  ]
   for_each = var.target_hosts
 
   destination = var.install_dir

@@ -10,25 +10,6 @@ then
   exit 0
 fi
 
-function retry {
-  local retries=$1
-  shift
-  local count=0
-
-  until "$@"; do
-    exit=$?
-    wait=$((2 ** count))
-    count=$((count + 1))
-    if [ "$count" -lt "$retries" ]; then
-      sleep "$wait"
-    else
-      exit "$exit"
-    fi
-  done
-
-  return 0
-}
-
 # Wait for cloud-init to finish so it doesn't race with any of our package installations.
 # Note: Amazon Linux 2 throws Python 2.7 errors when running `cloud-init status` as
 # non-root user (known bug).
@@ -52,7 +33,7 @@ elif [ "$PACKAGE_MANAGER" = "zypper" ]; then
   sudo zypper install --no-confirm ${PACKAGES[@]} || ( sudo SUSEConnect -p PackageHub/$SLES_VERSION/$ARCH && sudo zypper install --no-confirm ${PACKAGES[@]})
   # For SUSE distros on arm64 architecture, we need to manually install these two
   # packages in order to install Vault RPM packages later.
-  if [ "$ARCH" = "aarch64" ]; then
+  if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
     sudo zypper install --no-confirm libcap-progs
     sudo zypper install --no-confirm openssl
   fi

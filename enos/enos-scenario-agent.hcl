@@ -51,7 +51,7 @@ scenario "agent" {
       sles         = provider.enos.ec2_user
       ubuntu       = provider.enos.ubuntu
     }
-    manage_service    = matrix.artifact_type == "bundle"
+    manage_service = matrix.artifact_type == "bundle"
   }
 
   step "get_local_metadata" {

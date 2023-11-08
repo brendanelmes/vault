@@ -62,7 +62,7 @@ scenario "upgrade" {
       sles         = provider.enos.ec2_user
       ubuntu       = provider.enos.ubuntu
     }
-    manage_service    = matrix.artifact_type == "bundle"
+    manage_service = matrix.artifact_type == "bundle"
   }
 
   step "get_local_metadata" {
@@ -202,12 +202,12 @@ scenario "upgrade" {
     }
 
     variables {
-      arch                    = matrix.arch
+      arch = matrix.arch
       # awskms_unseal_key_arn   = step.create_vpc.kms_key_arn
       backend_cluster_name    = step.create_vault_cluster_backend_targets.cluster_name
       backend_cluster_tag_key = global.backend_tag_key
-      consul_license          = (matrix.backend == "consul" && matrix.consul_edition == "ent") ? step.read_backend_license.license : null
       cluster_name            = step.create_vault_cluster_targets.cluster_name
+      consul_license          = (matrix.backend == "consul" && matrix.consul_edition == "ent") ? step.read_backend_license.license : null
       consul_release = matrix.backend == "consul" ? {
         edition = matrix.consul_edition
         version = matrix.consul_version

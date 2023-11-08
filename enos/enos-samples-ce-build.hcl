@@ -107,7 +107,7 @@ sample "build_ce_linux_arm64_rpm" {
       arch            = ["arm64"]
       artifact_source = ["crt"]
       artifact_type   = ["package"]
-      distro          = ["rhel"]
+      distro          = ["amazon_linux", "leap", "rhel"]
       edition         = ["ce"]
     }
   }
@@ -117,7 +117,7 @@ sample "build_ce_linux_arm64_rpm" {
       arch            = ["arm64"]
       artifact_source = ["crt"]
       artifact_type   = ["package"]
-      distro          = ["rhel"]
+      distro          = ["amazon_linux", "leap", "rhel"]
       edition         = ["ce"]
     }
   }
@@ -127,7 +127,7 @@ sample "build_ce_linux_arm64_rpm" {
       arch            = ["arm64"]
       artifact_source = ["crt"]
       artifact_type   = ["package"]
-      distro          = ["rhel"]
+      distro          = ["amazon_linux", "leap", "rhel"]
       edition         = ["ce"]
     }
   }
@@ -141,7 +141,7 @@ sample "build_ce_linux_amd64_rpm" {
       arch            = ["amd64"]
       artifact_source = ["crt"]
       artifact_type   = ["package"]
-      distro          = ["rhel"]
+      distro          = ["amazon_linux", "leap", "rhel", "sles"]
       edition         = ["ce"]
     }
   }
@@ -151,7 +151,7 @@ sample "build_ce_linux_amd64_rpm" {
       arch            = ["amd64"]
       artifact_source = ["crt"]
       artifact_type   = ["package"]
-      distro          = ["rhel"]
+      distro          = ["amazon_linux", "leap", "rhel", "sles"]
       edition         = ["ce"]
     }
   }
@@ -161,7 +161,7 @@ sample "build_ce_linux_amd64_rpm" {
       arch            = ["amd64"]
       artifact_source = ["crt"]
       artifact_type   = ["package"]
-      distro          = ["rhel"]
+      distro          = ["amazon_linux", "leap", "rhel", "sles"]
       edition         = ["ce"]
     }
   }
@@ -171,7 +171,7 @@ sample "build_ce_linux_amd64_rpm" {
       arch            = ["amd64"]
       artifact_source = ["crt"]
       artifact_type   = ["package"]
-      distro          = ["rhel"]
+      distro          = ["amazon_linux", "leap", "rhel", "sles"]
       edition         = ["ce"]
 
       exclude {

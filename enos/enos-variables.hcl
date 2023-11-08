@@ -90,7 +90,7 @@ variable "distro_version_rhel" {
 variable "distro_version_sles" {
   description = "The version of SUSE SLES to use"
   type        = string
-  default     = "v15_sp5_standard" // or "v12_sp5_standard", "v15_sp4_standard"
+  default     = "v15_sp5_standard" // or "v15_sp4_standard"
 }
 
 variable "distro_version_ubuntu" {

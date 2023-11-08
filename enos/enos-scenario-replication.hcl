@@ -915,9 +915,4 @@ scenario "replication" {
     description = "The Vault updated secondary cluster primaries connection status"
     value       = step.verify_updated_performance_replication.secondary_replication_data_primaries
   }
-
-  output "secondary_cluster_root_token" {
-    description = "The Vault secondary cluster root token"
-    value       = step.create_secondary_cluster.root_token
-  }
 }
