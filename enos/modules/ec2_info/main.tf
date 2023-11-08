@@ -210,23 +210,6 @@ data "aws_ami" "amazon_linux_2" {
   owners = [local.amazon_owner_id]
 }
 
-data "aws_ami" "sles_12_sp5_standard" {
-  most_recent = true
-
-  filter {
-    name   = "description"
-    values = ["SUSE Linux Enterprise Server 12 SP5 (HVM*"]
-  }
-
-  filter {
-    name = "architecture"
-    # arm64 only available for BYOS images for SLES 12 SP5
-    values = ["x86_64"]
-  }
-
-  owners = [local.sles_owner_id]
-}
-
 data "aws_ami" "sles_15_sp4_standard" {
   most_recent = true
   for_each    = local.architectures

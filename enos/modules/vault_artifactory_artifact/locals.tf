@@ -1,14 +1,6 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: BUSL-1.1
 
-# An explainer for this dreadful file
-# - Bundles final form:
-#   - ce:   vault_1.14.1_linux_amd64.zip
-#   - ent:  vault_1.14.1+ent_linux_amd64.zip
-# - Packages final form (ent only):
-#   - deb:  vault-enterprise_1.14.1+ent-1_amd64.deb
-#   - rpm:  vault-enterprise-1.14.1+ent-1.x86_64.rpm
-
 locals {
 
   // file name extensions for the install packages of vault for the various architectures, distributions and editions
@@ -72,20 +64,10 @@ locals {
     }
   }
 
-  # // edition --> artifact name edition
-  # artifact_name_edition = {
-  #   "ce"               = ""
-  #   "ent"              = ""
-  #   "ent.hsm"          = ".hsm"
-  #   "ent.fips1402"     = ".fips1402"
-  #   "ent.hsm.fips1402" = ".hsm.fips1402"
-  # }
-
-  # Bundles will get the form: vault_
-
-  # Prefix for the artifact name. Ex: vault_, vault-, vault-enterprise_, vault-enterprise-hsm-fips1402-
+  # Prefix for the artifact name. Ex: vault_, vault-, vault-enterprise_, vault-enterprise-hsm-fips1402-, etc
   artifact_name_prefix = var.artifact_type == "package" ? local.artifact_package_release_names[var.distro][var.edition] : "vault_"
   # Suffix and extension for the artifact name. Ex: _linux_<arch>.zip, 
   artifact_name_extension = var.artifact_type == "package" ? local.package_extensions[var.arch][var.distro] : "_linux_${var.arch}.zip"
+  # Combine prefix/suffix/extension together to form the artifact name
   artifact_name           = var.artifact_type == "package" ? "${local.artifact_name_prefix}${replace(local.artifact_version, "-", "~")}${local.artifact_name_extension}" : "${local.artifact_name_prefix}${var.product_version}${local.artifact_name_extension}"
 }
