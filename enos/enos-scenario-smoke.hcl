@@ -430,13 +430,4 @@ scenario "smoke" {
     description = "The Vault cluster unseal keys hex"
     value       = step.create_vault_cluster.unseal_keys_hex
   }
-
-  # TO DO: remove
-  output "package_install_env" {
-    value = step.create_vault_cluster.package_install_env
-  }
-
-  output "distro_version_sles" {
-    value = step.create_vault_cluster.distro_version_sles
-  }
 }
