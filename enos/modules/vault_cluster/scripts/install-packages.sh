@@ -21,9 +21,14 @@ echo "Installing Dependencies: $PACKAGES"
 if [ "$PACKAGE_MANAGER" = "apt" ]; then
   cd /tmp
   sudo apt update
+  # Disable this shellcheck rule about double-quoting array expansions; if we use
+  # double quotes on ${PACKAGES[@]}, it does not take the packages as separate
+  # arguments.
+  # shellcheck disable=SC2068,SC2086
   sudo apt install -y ${PACKAGES[@]}
 elif [ "$PACKAGE_MANAGER" = "yum" ]; then
   cd /tmp
+   # shellcheck disable=SC2068,SC2086
   sudo yum -y install ${PACKAGES[@]}
 elif [ "$PACKAGE_MANAGER" = "zypper" ]; then
   # Note: For some SUSE distro versions, and/or some packages, the
@@ -31,10 +36,7 @@ elif [ "$PACKAGE_MANAGER" = "zypper" ]; then
   # fails, we instead attempt to register with PackageHub,SUSE's third party
   # package marketplace, and then find and install the package from there.
 
-  # Disable this shellcheck rule about double-quoting array expansions; if we use
-  # double quotes on ${PACKAGES[@]}, it does not take the packages as separate
-  # arguments.
-  # shellcheck disable=SC2068
+  # shellcheck disable=SC2068,SC2086
   sudo zypper install --no-confirm ${PACKAGES[@]} || ( sudo SUSEConnect -p PackageHub/$SLES_VERSION/$ARCH && sudo zypper install --no-confirm ${PACKAGES[@]})
   # For SUSE distros on arm64 architecture, we need to manually install these two
   # packages in order to install Vault RPM packages later.
