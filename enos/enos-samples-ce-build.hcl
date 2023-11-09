@@ -105,6 +105,7 @@ sample "build_ce_linux_arm64_rpm" {
       arch            = ["arm64"]
       artifact_source = ["crt"]
       artifact_type   = ["package"]
+      consul_edition  = ["ce"]
       distro          = ["rhel"]
       edition         = ["ce"]
     }
